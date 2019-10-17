@@ -196,5 +196,17 @@ class stemm_es {
 		
 		return stemm_es::removeAccent($word);
 	}
+
+	function stemmp($paragraph){
+		$results=array();
+		$word=strtok($paragraph, " \n\t\r");
+		while($word!== false){
+			// Clean 
+			$word=preg_replace('/[^A-Za-z0-9áéúüóíñ ]/', '', strtolower($word));
+			array_push($results,stemm_es::stemm($word));
+			$word= strtok(" \n\t\r");
+		}
+		return $results;
+	}
 }
 ?>
